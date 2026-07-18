@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import AppLayout from "./(root)/layout";
+import { Inter } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -17,9 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        <AppLayout>{children}</AppLayout>
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   );
 }

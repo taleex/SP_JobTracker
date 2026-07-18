@@ -3,5 +3,5 @@ export const metadata = {
 };
 
 export default function Dashboard() {
-  return <div>hello</div>;
+  return <div></div>;
 }
