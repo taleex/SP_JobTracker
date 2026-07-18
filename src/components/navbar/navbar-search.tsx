@@ -7,13 +7,13 @@ import SearchIcon from "../shared/search-icon";
 
 export default function NavbarSearch() {
   return (
-    <div className="min-w-2xs">
-      <InputGroup>
+    <>
+      <InputGroup className="max-w-[40%] p-5">
         <InputGroupInput placeholder="Search..." />
         <InputGroupAddon>
           <SearchIcon />
         </InputGroupAddon>
       </InputGroup>
-    </div>
+    </>
   );
 }

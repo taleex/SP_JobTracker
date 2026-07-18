@@ -1,4 +1,6 @@
 import NavbarMenu from "@/components/navbar/navbar-menu";
+import SideBarIndex from "@/components/sidebar/sidebar-index";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function DashboardLayout({
   children,
@@ -6,9 +8,14 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <section>
-      <NavbarMenu />
-      {children}
-    </section>
+    <>
+      <SidebarProvider>
+        <SideBarIndex />
+        <div className="w-full">
+          <NavbarMenu />
+          {children}
+        </div>
+      </SidebarProvider>
+    </>
   );
 }
