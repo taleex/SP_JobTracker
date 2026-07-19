@@ -6,7 +6,7 @@ import SidebarFooters from "./sidebar-footers";
 
 export default function SideBarIndex() {
   return (
-    <Sidebar className={cn("bg-amber-800")}>
+    <Sidebar>
       <SidebarHeaders />
       <SidebarContents />
       <SidebarFooters />
