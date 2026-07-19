@@ -18,9 +18,9 @@ export default function SidebarHeaders() {
       <SidebarMenu>
         <SidebarMenuItem>
           <DropdownMenu>
-            <DropdownMenuTrigger>
-              <SidebarMenuButton>Select Workspace</SidebarMenuButton>
-            </DropdownMenuTrigger>
+            <DropdownMenuTrigger
+              render={<SidebarMenuButton>Select Workspace</SidebarMenuButton>}
+            />
             <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
               <DropdownMenuItem>
                 <span>Acme Inc</span>
