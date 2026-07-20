@@ -1,28 +1,14 @@
 "use client";
 
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "../ui/table";
+import { getJobs } from "@/lib/actions";
+import JobTable from "./job-table";
 
 export function JobList() {
+  const jobs = getJobs;
+
   return (
     <div className="overflow-hidden rounded-md border">
-      <Table>
-        <TableHeader>ID</TableHeader>
-        <TableHead>2</TableHead>
-        <TableBody>
-          <TableCell>e</TableCell>
-          <TableRow>d</TableRow>
-          <TableRow>d</TableRow>
-          <TableRow>d</TableRow>
-          <TableRow>d</TableRow>
-        </TableBody>
-      </Table>
+      <JobTable />
     </div>
   );
 }
