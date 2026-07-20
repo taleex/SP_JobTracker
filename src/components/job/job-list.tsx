@@ -6,6 +6,8 @@ import JobTable from "./job-table";
 export function JobList() {
   const jobs = getJobs;
 
+  console.log(jobs);
+
   return (
     <div className="overflow-hidden rounded-md border">
       <JobTable />
