@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 
 export default function NavbarBtns() {
   return (
-    <section>
+    <section className="flex items-center gap-2">
       <ModeToggle />
       <Button>Account</Button>
     </section>

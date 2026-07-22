@@ -8,6 +8,8 @@ import {
   TableRow,
 } from "../ui/table";
 import { Button } from "../ui/button";
+import { Trash2Icon } from "lucide-react";
+import { clsx } from "clsx";
 
 export default async function JobTable() {
   const jobs = await getJobsbyUser(1);
@@ -26,9 +28,21 @@ export default async function JobTable() {
           <TableRow key={job.id}>
             <TableCell>{job.role}</TableCell>
             <TableCell>{job.company}</TableCell>
-            <TableCell>{job.status}</TableCell>
             <TableCell>
+              <span
+                className={clsx(
+                  "",
+                  job.status === "APPLIED" && "text-green-400",
+                  job.status === "REJECTED" && "text-destructive",
+                  job.status === "SAVED" && "text-purple-300",
+                )}
+              >
+                {job.status}
+              </span>
+            </TableCell>
+            <TableCell className="flex gap-2 items-center">
               <Button variant="outline"> View more</Button>
+              <Trash2Icon size={16} className="hover:stroke-destructive" />
             </TableCell>
           </TableRow>
         ))}

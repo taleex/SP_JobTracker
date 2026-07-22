@@ -6,7 +6,7 @@ import NavbarBtns from "./navbar-btn";
 
 export default function NavbarMenu() {
   return (
-    <nav className="flex sticky top-0 z-50 p-6 h-16 bg-secondary">
+    <nav className="flex items-center gap-2 sticky top-0 z-50 p-6 h-16 bg-secondary">
       <NavigationMenu className={cn("max-w-full justify-between")}>
         <NavBarLogo />
         <NavbarSearch />
