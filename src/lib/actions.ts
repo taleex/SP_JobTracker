@@ -1,8 +1,5 @@
 "use server";
 import db from "@/lib/db";
-import prismaConfig from "../../prisma.config";
-import { Prisma } from "@/generated/prisma/client";
-import { equal } from "assert";
 
 // Jobs
 
@@ -15,10 +12,16 @@ export async function updateJobStatus(jobId: number, status: string) {
 export async function deleteJob(jobId: number) {
   return null;
 }
-export async function getJobs(userId: number) {
-  const jobsByUser = await db.job.findMany({
-    where: { userId: userId },
-  });
+export async function getJobsbyUser(userId: number) {
+  try {
+    const jobsByUser = await db.job.findMany({
+      where: { userId: userId },
+      orderBy: { createdAt: "desc" },
+    });
 
-  return jobsByUser.findLast;
+    return jobsByUser;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
 }
