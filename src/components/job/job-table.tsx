@@ -31,10 +31,13 @@ export default async function JobTable() {
             <TableCell>
               <span
                 className={clsx(
-                  "",
+                  "font-bold",
                   job.status === "APPLIED" && "text-green-400",
                   job.status === "REJECTED" && "text-destructive",
                   job.status === "SAVED" && "text-purple-300",
+                  job.status === "OFFER" && "text-blue-400",
+                  job.status === "INTERVIEW" && "text-amber-600",
+                  job.status === "GHOSTED" && "text-cyan-900",
                 )}
               >
                 {job.status}
