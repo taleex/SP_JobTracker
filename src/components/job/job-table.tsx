@@ -45,7 +45,7 @@ export default async function JobTable() {
             </TableCell>
             <TableCell className="flex gap-2 items-center">
               <Button variant="outline"> View more</Button>
-              <Trash2Icon size={16} className="hover:stroke-destructive" />
+              <Trash2Icon size={14} className="hover:stroke-destructive" />
             </TableCell>
           </TableRow>
         ))}
