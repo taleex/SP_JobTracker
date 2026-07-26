@@ -10,6 +10,7 @@ import {
 import { Button } from "../ui/button";
 import { Trash2Icon } from "lucide-react";
 import { clsx } from "clsx";
+import { DeleteJobBtn } from "./delete-job-btn";
 
 export default async function JobTable() {
   const jobs = await getJobsbyUser(1);
@@ -45,7 +46,7 @@ export default async function JobTable() {
             </TableCell>
             <TableCell className="flex gap-2 items-center">
               <Button variant="outline"> View more</Button>
-              <Trash2Icon size={14} className="hover:stroke-destructive" />
+              <DeleteJobBtn />
             </TableCell>
           </TableRow>
         ))}
