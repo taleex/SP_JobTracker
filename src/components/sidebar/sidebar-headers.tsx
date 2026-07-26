@@ -5,28 +5,19 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "../ui/sidebar";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+import {} from "@/components/ui/dropdown-menu";
+import SideBarLogo from "./sidebar-logo";
 
 export default function SidebarHeaders() {
   return (
     <SidebarHeader>
+      {/* Workspace Selector */}
       <SidebarMenu>
         <SidebarMenuItem>
-          <DropdownMenu>
-            <DropdownMenuTrigger
-              render={<SidebarMenuButton>Select Workspace</SidebarMenuButton>}
-            />
-            <DropdownMenuContent className="w-[--radix-popper-anchor-width]">
-              <DropdownMenuItem>
-                <span>Acme Inc</span>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <SidebarMenuButton className="">
+            -
+            <SideBarLogo />
+          </SidebarMenuButton>
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarHeader>

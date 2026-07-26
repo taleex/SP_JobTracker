@@ -5,7 +5,7 @@ import SidebarFooters from "./sidebar-footers";
 
 export default function SideBarIndex() {
   return (
-    <Sidebar className="top-16 h-[calc(100svh-4rem)]">
+    <Sidebar>
       <SidebarHeaders />
       <SidebarContents />
       <SidebarFooters />
