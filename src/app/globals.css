@@ -118,6 +118,32 @@
   --sidebar-ring: oklch(0.547 0.021 43.1);
 }
 
+.auth-container {
+  @apply flex h-full;
+}
+
+.auth-left {
+  @apply flex flex-col p-16 w-1/2 h-full bg-primary;
+}
+
+.auth-left-image {
+  @apply justify-center items-center w-full;
+}
+
+.auth-left-text-section {
+  @apply flex flex-col gap-y-2 justify-items-center;
+}
+.auth-left-heading {
+  @apply text-[14px] font-semibold text-white;
+}
+.auth-left-subtext {
+  @apply text-[16px] font-normal text-secondary;
+}
+
+.auth-right {
+  @apply flex flex-col justify-center items-center p-16 w-1/2 h-full bg-card;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

@@ -1,5 +1,3 @@
-import { ThemeProvider } from "@/components/theme/theme-provider";
-
 export default function HomeLayout({
   children,
 }: {
