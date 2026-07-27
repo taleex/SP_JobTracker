@@ -13,3 +13,5 @@ export function useJobs() {
     enabled: !!userId,
   });
 }
+
+export function createJob() {}
