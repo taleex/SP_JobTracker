@@ -3,9 +3,9 @@ import { JobList } from "@/components/job/job-list";
 
 export default async function DashboardHome() {
   return (
-    <main className="p-8">
-      <div className="flex justify-between p-2">
-        <h1 className="text-3xl font-bold">Dashboard</h1>
+    <main className="dashboard-main">
+      <div className="dashboard-header">
+        <h1 className="dashboard-title">Dashboard</h1>
         <FormJobBtn />
       </div>
       <JobList />

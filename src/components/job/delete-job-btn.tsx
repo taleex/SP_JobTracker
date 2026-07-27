@@ -17,11 +17,11 @@ export function DeleteJobBtn() {
   return (
     <AlertDialog>
       <AlertDialogTrigger
-        render={<Trash2Icon size={16} className="hover:stroke-destructive" />}
+        render={<Trash2Icon size={16} className="delete-trigger-icon" />}
       />
       <AlertDialogContent size="sm">
         <AlertDialogHeader>
-          <AlertDialogMedia className="bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive">
+          <AlertDialogMedia className="delete-dialog-icon-wrapper">
             <Trash2Icon />
           </AlertDialogMedia>
           <AlertDialogTitle>Delete Job?</AlertDialogTitle>

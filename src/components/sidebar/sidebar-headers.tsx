@@ -1,10 +1,5 @@
 import React from "react";
-import {
-  SidebarHeader,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-} from "../ui/sidebar";
+import { SidebarHeader, SidebarMenu, SidebarMenuItem } from "../ui/sidebar";
 import {} from "@/components/ui/dropdown-menu";
 import SideBarLogo from "./sidebar-logo";
 
@@ -14,10 +9,7 @@ export default function SidebarHeaders() {
       {/* Workspace Selector */}
       <SidebarMenu>
         <SidebarMenuItem>
-          <SidebarMenuButton className="">
-            -
-            <SideBarLogo />
-          </SidebarMenuButton>
+          <SideBarLogo />
         </SidebarMenuItem>
       </SidebarMenu>
     </SidebarHeader>
