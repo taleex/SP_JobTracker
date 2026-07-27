@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import QueryProvider from "@/providers/query-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -24,18 +25,19 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
-        <script
-          async
-          dangerouslySetInnerHTML={{
-            __html: `
+        <QueryProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+          <script
+            async
+            dangerouslySetInnerHTML={{
+              __html: `
             try {
               var theme = localStorage.getItem("theme");
               if (!theme) {
@@ -44,8 +46,9 @@ export default function RootLayout({
               document.documentElement.classList.add(theme);
             } catch(e) {}
           `,
-          }}
-        />
+            }}
+          />
+        </QueryProvider>
       </body>
     </html>
   );

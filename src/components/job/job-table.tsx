@@ -1,4 +1,5 @@
-import { getJobsbyUser } from "@/lib/actions";
+"use client";
+
 import {
   Table,
   TableBody,
@@ -11,9 +12,10 @@ import { Button } from "../ui/button";
 import { clsx } from "clsx";
 import { DeleteJobBtn } from "./delete-job-btn";
 import EditBtn from "../shared/edit-btn";
+import { useJobs } from "@/hooks/use-jobs";
 
-export default async function JobTable() {
-  const jobs = await getJobsbyUser(1);
+export default function JobTable() {
+  const { data: jobs, isLoading, isError } = useJobs();
 
   return (
     <Table>
@@ -25,7 +27,7 @@ export default async function JobTable() {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {jobs.map((job) => (
+        {jobs?.map((job) => (
           <TableRow key={job.id}>
             <TableCell>{job.role}</TableCell>
             <TableCell>{job.company}</TableCell>
