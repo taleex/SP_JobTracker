@@ -1,9 +1,10 @@
-import { AuthForm } from "./auth-form-index";
+import { AuthForm } from "./auth-form-fields";
+import AuthFormTitle from "./auth-form-title";
 
 export default function AuthRightContainer() {
   return (
     <section className="auth-right">
-      <h1 className="auth-form-title">Create Account!</h1>
+      <AuthFormTitle />
       <AuthForm />
     </section>
   );
