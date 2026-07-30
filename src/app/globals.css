@@ -118,6 +118,26 @@
   --sidebar-ring: oklch(0.547 0.021 43.1);
 }
 
+/* Marketing Page*/
+
+.nav-bar-marketing {
+  @apply flex w-full justify-between items-center h-10 border-b p-8 bg-secondary;
+}
+
+.nav-bar-marketing-logo {
+  @apply text-3xl font-bold text-primary;
+}
+
+.nav-bar-marketing-buttons-group {
+  @apply flex items-center gap-2;
+}
+
+.hero-section {
+  @apply flex flex-col w-full h-100 bg-primary;
+}
+
+/* Auth page */
+
 .auth-container {
   @apply flex h-full;
 }
