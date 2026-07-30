@@ -1,25 +1,35 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 export default function HeroSection() {
   return (
     <section className="hero-section">
       <div className="hero-section-top-container">
-        <h1 className="hero-title">Track your candidatures</h1>
+        <h1 className="hero-title">Take Control of Your Job Search Journey</h1>
         <p className="hero-paragraph">
-          be always in <span className="hero-paragraph-span">Track</span> of
-          your candidatures progress.
+          Track applications, manage interviews, and land your dream job —{" "}
+          <span className="hero-paragraph-span">all in one place</span>.
         </p>
+        <div className="hero-image-wrapper">
+          <Image
+            src="/Images/dashboard.png"
+            alt="JobTracker dashboard preview showing application management interface"
+            width={1200}
+            height={675}
+            className="w-full h-auto"
+            priority
+          />
+        </div>
         <div className="hero-buttons">
           <Button className={cn("hero-button-getstarted")} variant="secondary">
-            Get Started
+            Get Started Free
           </Button>
           <Button className={cn("hero-button-learnmore")} variant="outline">
-            Learn more
+            See How It Works
           </Button>
         </div>
       </div>
-      <div className="hero-section-bottom-container">test</div>
     </section>
   );
 }

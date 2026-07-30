@@ -1,10 +1,19 @@
+/* ============================================
+   Imports
+   ============================================ */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "./(root)/app/app.css";
 @import "shadcn/tailwind.css";
 
+/* ============================================
+   Theme Variables
+   ============================================ */
+
+/* --- Dark Variant --- */
 @custom-variant dark (&:is(.dark *));
 
+/* --- Theme Inline Tokens --- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -49,6 +58,7 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* --- Light Mode (Default) --- */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.147 0.004 49.3);
@@ -84,6 +94,7 @@
   --sidebar-ring: oklch(0.714 0.014 41.2);
 }
 
+/* --- Dark Mode --- */
 .dark {
   --background: oklch(0.147 0.004 49.3);
   --foreground: oklch(0.986 0.002 67.8);
@@ -118,8 +129,26 @@
   --sidebar-ring: oklch(0.547 0.021 43.1);
 }
 
-/* Marketing Page*/
+/* ============================================
+   Base Layer
+   ============================================ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
 
+/* ============================================
+   Marketing Page Styles
+   ============================================ */
+
+/* --- Navbar --- */
 .nav-bar-marketing {
   @apply flex w-full justify-between items-center h-10 border-b p-8 bg-secondary sticky;
 }
@@ -132,44 +161,46 @@
   @apply flex items-center gap-2;
 }
 
+/* --- Hero Section --- */
 .hero-section {
-  @apply flex flex-col w-full gap-2 items-center h-[70%] p-8 bg-primary;
+  @apply flex flex-col w-full gap-2 items-center min-h-[70dvh] p-8 bg-primary;
 }
 
 .hero-section-top-container {
-  @apply flex flex-col gap-4 items-center p-16 h-full w-full;
-}
-
-.hero-section-bottom-container {
-  @apply flex flex-col gap-2 items-center p-16 h-full w-full;
+  @apply flex flex-col gap-4 items-center pt-16 pb-8 w-full;
 }
 
 .hero-title {
-  @apply font-bold text-secondary text-5xl capitalize;
+  @apply font-bold text-secondary text-5xl md:text-6xl capitalize text-center;
 }
 
 .hero-paragraph {
-  @apply font-heading text-secondary text-xl ml-3 capitalize;
+  @apply font-heading text-secondary text-xl md:text-2xl text-center max-w-2xl;
 }
 
 .hero-paragraph-span {
-  @apply font-bold text-shadow-primary-foreground;
+  @apply font-bold text-amber-300;
+}
+
+.hero-image-wrapper {
+  @apply relative w-full max-w-4xl h-auto rounded-xl overflow-hidden shadow-2xl my-4;
 }
 
 .hero-buttons {
-  @apply flex gap-2;
+  @apply flex gap-4 mt-2;
 }
 
 .hero-button-getstarted {
-  @apply p-5 rounded-3xl;
+  @apply px-8 py-6 rounded-3xl font-bold text-lg;
 }
 
 .hero-button-learnmore {
-  @apply p-5 rounded-3xl bg-transparent text-secondary border border-secondary font-bold hover:bg-secondary hover:text-primary;
+  @apply px-8 py-6 rounded-3xl bg-transparent text-secondary border-2 border-secondary font-bold text-lg hover:bg-secondary hover:text-primary;
 }
 
-/* Auth page */
-
+/* ============================================
+   Auth Page Styles
+   ============================================ */
 .auth-container {
   @apply flex h-full;
 }
@@ -185,9 +216,11 @@
 .auth-left-text-section {
   @apply flex flex-col gap-y-2 justify-items-center;
 }
+
 .auth-left-heading {
   @apply text-[14px] font-semibold text-white;
 }
+
 .auth-left-subtext {
   @apply text-[16px] font-normal text-secondary;
 }
@@ -198,16 +231,4 @@
 
 .auth-form-title {
   @apply text-4xl font-bold text-black;
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
 }
