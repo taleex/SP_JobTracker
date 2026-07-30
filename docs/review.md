@@ -477,7 +477,31 @@ Adicionar testes unitários e de integração para componentes críticos, hooks 
 
 - Setup inicial: `npm install -D vitest @testing-library/react`
 
+### [Marketing] Feature: Implementar Landing Page (Marketing Site)
+
+## Objetivo
+
+Criar a landing page do JobTracker para apresentar o produto, atrair utilizadores e direcioná-los para o registo. Atualmente a página `/` está vazia.
+
+## Critérios de Aceitação
+
+- [ ] Criar `NavBarMarketing` com logo, links (Home, Features, About, Contact) e botões Login/Sign Up
+- [ ] Criar `HeroSection` com título, subtítulo, CTA principal ("Get Started Free" → `/register`) e CTA secundário ("Learn More" → scroll)
+- [ ] Incluir mockup/screenshot do dashboard no hero
+- [ ] Criar `FeaturesSection` com grid de 3-4 cards: Track Applications, Status Pipeline, Notes & Links, Dark Mode
+- [ ] Criar `HowItWorksSection` com 3 passos: Sign up → Add a job → Track progress
+- [ ] Criar `CTASection` com "Ready to track your applications?" + botão "Get Started"
+- [ ] Criar `Footer` com links About, Privacy, Terms e copyright
+- [ ] Compor `page.tsx` com todos os componentes na ordem correta
+- [ ] Garantir responsividade e dark mode consistente
+
+## Notas
+
+- Ficheiros: `src/app/(root)/(marketing)/page.tsx`, `src/app/(root)/(marketing)/layout.tsx`
+- Componentes: `src/components/marketing/nav-bar-marketing.tsx`, `hero-section.tsx`, `features-section.tsx`, `how-it-works.tsx`, `cta-section.tsx`, `footer.tsx`
+- Já existem: `nav-bar-marketing.tsx`, `hero-section.tsx`
+
 ---
 
 _Revisão gerada em: 30 de Julho de 2026_
-_Total de tickets: 11_
+_Total de tickets: 12_
