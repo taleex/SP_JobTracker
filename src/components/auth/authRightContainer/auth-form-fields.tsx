@@ -23,6 +23,8 @@ export function AuthForm() {
           type="email"
           placeholder="name@example.com"
         />
+
+        {/* Checkbox - Remember me */}
         <FieldGroup className="mx-auto w-56">
           <Field orientation="horizontal" data-invalid>
             <Checkbox
