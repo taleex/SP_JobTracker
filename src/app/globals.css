@@ -121,7 +121,7 @@
 /* Marketing Page*/
 
 .nav-bar-marketing {
-  @apply flex w-full justify-between items-center h-10 border-b p-8 bg-secondary;
+  @apply flex w-full justify-between items-center h-10 border-b p-8 bg-secondary sticky;
 }
 
 .nav-bar-marketing-logo {
@@ -133,7 +133,39 @@
 }
 
 .hero-section {
-  @apply flex flex-col w-full h-100 bg-primary;
+  @apply flex flex-col w-full gap-2 items-center h-[70%] p-8 bg-primary;
+}
+
+.hero-section-top-container {
+  @apply flex flex-col gap-4 items-center p-16 h-full w-full;
+}
+
+.hero-section-bottom-container {
+  @apply flex flex-col gap-2 items-center p-16 h-full w-full;
+}
+
+.hero-title {
+  @apply font-bold text-secondary text-5xl capitalize;
+}
+
+.hero-paragraph {
+  @apply font-heading text-secondary text-xl ml-3 capitalize;
+}
+
+.hero-paragraph-span {
+  @apply font-bold text-shadow-primary-foreground;
+}
+
+.hero-buttons {
+  @apply flex gap-2;
+}
+
+.hero-button-getstarted {
+  @apply p-5 rounded-3xl;
+}
+
+.hero-button-learnmore {
+  @apply p-5 rounded-3xl bg-transparent text-secondary border border-secondary font-bold hover:bg-secondary hover:text-primary;
 }
 
 /* Auth page */

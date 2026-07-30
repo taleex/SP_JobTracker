@@ -1,4 +1,4 @@
-import HeroSection from "@/components/marketing/hero-section";
+import HeroSection from "@/components/marketing/hero-section/hero-section";
 
 export const metadata = {
   title: "Home",
@@ -6,8 +6,8 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main>
+    <>
       <HeroSection />
-    </main>
+    </>
   );
 }
