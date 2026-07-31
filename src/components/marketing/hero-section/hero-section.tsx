@@ -23,7 +23,7 @@ export default function HeroSection() {
           />
         </div>
         <div className="hero-buttons">
-          <Link href="/register/">
+          <Link href="/singup">
             <Button
               className={cn("hero-button-getstarted")}
               variant="secondary"

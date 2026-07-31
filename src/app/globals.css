@@ -161,6 +161,10 @@
   @apply flex items-center gap-2;
 }
 
+.nav-bar-marketing-buttons {
+  @apply h-10 w-28 rounded-3xl;
+}
+
 /* --- Hero Section --- */
 .hero-section {
   @apply flex flex-col w-full gap-2 items-center min-h-[70dvh] p-8 bg-primary;

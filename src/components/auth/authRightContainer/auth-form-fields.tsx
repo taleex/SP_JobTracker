@@ -26,20 +26,16 @@ export function AuthForm() {
 
         {/* Checkbox - Remember me */}
         <FieldGroup className="mx-auto w-56">
-          <Field orientation="horizontal" data-invalid>
+          <Field orientation="horizontal">
             <Checkbox
               id="terms-checkbox-invalid"
               name="terms-checkbox-invalid"
-              aria-invalid
             />
             <FieldLabel htmlFor="terms-checkbox-invalid">
-              Accept terms and conditions
+              remember me?
             </FieldLabel>
           </Field>
         </FieldGroup>
-        <FieldDescription>
-          We&apos;ll send updates to this address.
-        </FieldDescription>
       </Field>
 
       <Field orientation="horizontal">
