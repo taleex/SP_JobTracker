@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function HeroSection() {
   return (
@@ -22,9 +23,14 @@ export default function HeroSection() {
           />
         </div>
         <div className="hero-buttons">
-          <Button className={cn("hero-button-getstarted")} variant="secondary">
-            Get Started Free
-          </Button>
+          <Link href="/register/">
+            <Button
+              className={cn("hero-button-getstarted")}
+              variant="secondary"
+            >
+              Get Started Free
+            </Button>
+          </Link>
           <Button className={cn("hero-button-learnmore")} variant="outline">
             See How It Works
           </Button>

@@ -198,6 +198,16 @@
   @apply px-8 py-6 rounded-3xl bg-transparent text-secondary border-2 border-secondary font-bold text-lg hover:bg-secondary hover:text-primary;
 }
 
+/* --- Features Section --- */
+
+.feature-section {
+  @apply grid grid-cols-3 gap-6 w-full px-4 py-16 bg-secondary;
+}
+
+.feature-card {
+  @apply w-full p-8;
+}
+
 /* ============================================
    Auth Page Styles
    ============================================ */

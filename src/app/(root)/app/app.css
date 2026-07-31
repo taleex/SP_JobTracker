@@ -57,27 +57,27 @@
 
 /* Status colors */
 .status-applied {
-  @apply font-bold text-green-400;
+  @apply w-full font-bold bg-green-400;
 }
 
 .status-rejected {
-  @apply font-bold text-destructive;
+  @apply w-full font-bold bg-destructive;
 }
 
 .status-saved {
-  @apply font-bold text-purple-300;
+  @apply w-full font-bold bg-purple-300;
 }
 
 .status-offer {
-  @apply font-bold text-blue-400;
+  @apply w-full font-bold bg-blue-400;
 }
 
 .status-interview {
-  @apply font-bold text-amber-600;
+  @apply w-full font-bold bg-amber-600;
 }
 
 .status-ghosted {
-  @apply font-bold text-cyan-900;
+  @apply w-full font-bold bg-cyan-900;
 }
 
 /* --- Form / Dialog --- */
