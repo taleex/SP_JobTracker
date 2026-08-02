@@ -3,7 +3,10 @@ import SidebarHeaders from "./sidebar-headers";
 import SidebarContents from "./sidebar-contents";
 import SidebarFooters from "./sidebar-footers";
 
-export default function SideBarIndex() {
+/**
+ * Índice da sidebar — compõe header, conteúdo e footer.
+ */
+export default function SidebarIndex() {
   return (
     <Sidebar>
       <SidebarHeaders />

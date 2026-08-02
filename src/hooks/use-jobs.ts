@@ -1,17 +1,37 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { getJobsbyUser } from "@/lib/actions";
-import { useAuthStore } from "@/stores/auth-store";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import { createJob as createJobAction, getJobsByUser } from "@/lib/actions";
 
+/**
+ * Hook para listar os jobs do utilizador autenticado.
+ *
+ * Usa useSession() do NextAuth (em vez do auth-store que tinha
+ * o userId: 1 hardcoded). O userId real vem da sessão JWT.
+ */
 export function useJobs() {
-  const userId = useAuthStore((s) => s.userId);
+  const { data: session } = useSession();
+  const userId = session?.user?.id ? Number(session.user.id) : null;
 
   return useQuery({
     queryKey: ["jobs", userId],
-    queryFn: () => getJobsbyUser(userId!),
+    queryFn: () => getJobsByUser(),
     enabled: !!userId,
   });
 }
 
-export function createJob() {}
+/**
+ * Mutation para criar um job. Após sucesso invalida a query "jobs"
+ * para a tabela atualizar automaticamente.
+ */
+export function useCreateJob() {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: (formData: FormData) => createJobAction(formData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["jobs"] });
+    },
+  });
+}

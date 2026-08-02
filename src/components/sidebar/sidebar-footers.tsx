@@ -1,3 +1,5 @@
+"use client";
+
 import {
   SidebarFooter,
   SidebarMenu,
@@ -13,8 +15,19 @@ import {
 } from "@/components/ui/dropdown-menu";
 import LogoutBtn from "../shared/logout-btn";
 import { User, Settings, HelpCircle, ChevronUp } from "lucide-react";
+import { useSession } from "next-auth/react";
 
+/**
+ * Rodapé da sidebar — mostra o utilizador autenticado e o menu de logout.
+ *
+ * Os dados (nome/email) vêm da sessão do NextAuth, não estão hardcoded.
+ * Antes mostrava "John Doe" / "john@example.com" fixos.
+ */
 export default function SidebarFooters() {
+  const { data: session } = useSession();
+  const userName = session?.user?.name ?? "User";
+  const userEmail = session?.user?.email ?? "";
+
   return (
     <SidebarFooter>
       <SidebarMenu>
@@ -30,8 +43,8 @@ export default function SidebarFooters() {
                     <User className="size-4" />
                   </div>
                   <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-semibold">John Doe</span>
-                    <span className="truncate text-xs">john@example.com</span>
+                    <span className="truncate font-semibold">{userName}</span>
+                    <span className="truncate text-xs">{userEmail}</span>
                   </div>
                   <ChevronUp className="ml-auto size-4" />
                 </SidebarMenuButton>

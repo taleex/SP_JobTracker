@@ -3,6 +3,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import QueryProvider from "@/providers/query-provider";
+import SessionProvider from "@/providers/session-provider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -26,18 +27,19 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} h-screen`}>
         <QueryProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            {children}
-          </ThemeProvider>
-          <script
-            async
-            dangerouslySetInnerHTML={{
-              __html: `
+          <SessionProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+            <script
+              async
+              dangerouslySetInnerHTML={{
+                __html: `
             try {
               var theme = localStorage.getItem("theme");
               if (!theme) {
@@ -46,8 +48,9 @@ export default function RootLayout({
               document.documentElement.classList.add(theme);
             } catch(e) {}
           `,
-            }}
-          />
+              }}
+            />
+          </SessionProvider>
         </QueryProvider>
       </body>
     </html>

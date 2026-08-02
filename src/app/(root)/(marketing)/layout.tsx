@@ -1,4 +1,4 @@
-import NavBarMarketing from "@/components/marketing/nav-bar-marketing";
+import NavbarMarketing from "@/components/marketing/nav-bar-marketing";
 
 export default function HomeLayout({
   children,
@@ -7,7 +7,7 @@ export default function HomeLayout({
 }) {
   return (
     <main className="h-screen flex flex-col">
-      <NavBarMarketing />
+      <NavbarMarketing />
       <div className="w-full flex-1 overflow-y-auto">{children}</div>
     </main>
   );

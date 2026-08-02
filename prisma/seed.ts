@@ -14,6 +14,7 @@ async function main() {
     },
     update: {},
     create: {
+      name: "Demo User",
       email: "demo@example.com",
       password: hashedPassword,
     },

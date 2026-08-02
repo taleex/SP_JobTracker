@@ -1,5 +1,5 @@
 import NavbarMenu from "@/components/navbar/navbar-menu";
-import SideBarIndex from "@/components/sidebar/sidebar-index";
+import SidebarIndex from "@/components/sidebar/sidebar-index";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function DashboardLayout({
@@ -11,7 +11,7 @@ export default function DashboardLayout({
     <>
       <div className="app-root">
         <SidebarProvider className="app-sidebar-wrapper">
-          <SideBarIndex />
+          <SidebarIndex />
           <div className="app-content-area">
             <NavbarMenu />
             {children}

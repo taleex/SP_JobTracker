@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
-export default function NavBarMarketing() {
+export default function NavbarMarketing() {
   return (
     <nav className="nav-bar-marketing">
       <h1 className="nav-bar-marketing-logo">JobTrackers</h1>
