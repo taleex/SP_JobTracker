@@ -4,9 +4,12 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 export default function NavbarMarketing() {
   const pathname = usePathname();
+
+  const session = useSession();
 
   return (
     <nav
@@ -20,7 +23,7 @@ export default function NavbarMarketing() {
         <h1 className="nav-bar-marketing-logo">JobTrackers</h1>
       </Link>
 
-      {pathname !== "/login" && pathname !== "/signup" ? (
+      {pathname !== "/login" && pathname !== "/signup" && !session.data ? (
         <div className="nav-bar-marketing-buttons-group ">
           <Link href="/login">
             <Button
@@ -40,7 +43,14 @@ export default function NavbarMarketing() {
           </Link>
         </div>
       ) : (
-        ""
+        <Link href="/app/dashboard">
+          <Button
+            className={cn("nav-bar-marketing-buttons-primar")}
+            variant="secondary"
+          >
+            Dashboard
+          </Button>
+        </Link>
       )}
     </nav>
   );

@@ -1,4 +1,4 @@
-import JobTable from "./job-table";
+import JobTable from "./jobTable/job-table";
 
 export async function JobList() {
   return (
