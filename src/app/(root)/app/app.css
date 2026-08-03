@@ -8,7 +8,7 @@
 }
 
 .app-sidebar-wrapper {
-  @apply flex-1 min-h-[0];
+  @apply flex-1 min-h-0;
 }
 
 .app-content-area {
@@ -47,7 +47,7 @@
 
 /* --- Job List --- */
 .job-list-wrapper {
-  @apply overflow-hidden rounded-md border;
+  @apply overflow-hidden rounded-md;
 }
 
 /* --- Job Table --- */
