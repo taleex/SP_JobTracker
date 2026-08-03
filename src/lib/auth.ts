@@ -1,6 +1,5 @@
 import type { NextAuthOptions } from "next-auth";
 import { getServerSession } from "next-auth";
-import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import db from "@/lib/db";
@@ -12,7 +11,6 @@ import db from "@/lib/db";
  *
  * 1. PROVIDERS — os métodos de login disponíveis:
  *    • Credentials: login com email + password (valida contra a tabela User)
- *    • GitHub: login social (se o email ainda não existir na BD, é criado)
  *
  * 2. SESSION STRATEGY "jwt" — a sessão é um token JWT (stateless).
  *    Não precisamos de tabelas extra (Account/Session) no Prisma.
@@ -23,7 +21,7 @@ import db from "@/lib/db";
  *              e guardamos o userId interno da BD no token.
  *    • session() → expõe os dados do token na sessão que o cliente recebe.
  *
- * 4. PAGES — next-auth/{signin} → define para onde o middleware redireciona.
+ * 4. PAGES — next-auth/{signin} → define para onde o proxy redireciona.
  * ─────────────────────────────────────────────────────────────────────────
  */
 
@@ -59,17 +57,11 @@ export const authOptions: NextAuthOptions = {
         return { id: String(user.id), name: user.name, email: user.email };
       },
     }),
-
-    // ── Login social com GitHub ────────────────────────────────────────
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID!,
-      clientSecret: process.env.GITHUB_SECRET!,
-    }),
   ],
 
   session: { strategy: "jwt" },
 
-  // Redireciona para /login quando não há sessão (usado pelo middleware)
+  // Redireciona para /login quando não há sessão (usado pelo proxy)
   pages: { signIn: "/login" },
 
   callbacks: {
@@ -84,14 +76,14 @@ export const authOptions: NextAuthOptions = {
         const email = user.email ?? "";
 
         // Upsert: se o email já existe (ex: criado via signup), não altera nada.
-        // Se não existe (ex: primeiro login via GitHub), cria com password vazia.
+        // Se não existe (ex: user criado sem password), cria com password vazia.
         const dbUser = await db.user.upsert({
           where: { email },
           update: {}, // não altera dados existentes
           create: {
             name: user.name ?? "",
             email,
-            password: "", // sem password porque o login é via provider social
+            password: "",
           },
         });
 

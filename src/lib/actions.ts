@@ -58,12 +58,23 @@ export async function createUser(
   formData: FormData,
 ): Promise<CreateUserResult> {
   // 1. Extrair e validar os campos do formulário
-  const name = formData.get("name") as string | null;
-  const email = formData.get("email") as string | null;
-  const password = formData.get("password") as string | null;
+  //    (validação SERVER-SIDE — a do form é só UX e pode ser contornada)
+  const name = (formData.get("name") as string | null)?.trim() ?? "";
+  const email =
+    (formData.get("email") as string | null)?.trim().toLowerCase() ?? "";
+  const password = (formData.get("password") as string | null) ?? "";
 
   if (!name || !email || !password) {
     return { success: false, error: "All fields are required." };
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return { success: false, error: "Please enter a valid email address." };
+  }
+
+  if (name.length < 2) {
+    return { success: false, error: "Name must be at least 2 characters." };
   }
 
   if (password.length < 6) {

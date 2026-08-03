@@ -7,11 +7,17 @@ export default function HaveAccount({ mode }: HaveAccountProps) {
     <>
       {mode === "login" ? (
         <p className="have-account">
-          Don't have an account? <a href="/signup">Sign up</a>
+          Don't have an account?{" "}
+          <a href="/signup">
+            <span className="have-account-redirect">Sign up</span>
+          </a>
         </p>
       ) : (
         <p className="have-account">
-          Already have an account? <a href="/login">Log in</a>
+          Already have an account?{" "}
+          <a href="/login">
+            <span className="have-account-redirect">Log in</span>
+          </a>
         </p>
       )}
     </>

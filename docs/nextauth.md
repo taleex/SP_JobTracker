@@ -32,7 +32,7 @@ Browser                 Next.js                    Base de Dados
 | `src/app/api/auth/[...nextauth]/route.ts` | Exposição HTTP (`GET`/`POST`) dos endpoints `/api/auth/*`   |
 | `src/types/next-auth.d.ts`                | Augmentação de tipos (adiciona `id` à sessão)               |
 | `src/providers/session-provider.tsx`      | Provider client-side que dá `useSession()` à árvore         |
-| `src/middleware.ts`                       | Proteção de rotas (`/app/*` exige sessão)                   |
+| `src/proxy.ts`                            | Proteção de rotas (`/app/*` exige sessão)                   |
 | `src/app/(root)/(auth)/login/page.tsx`    | Página de login (USA o NextAuth para autenticar)            |
 | `src/app/(root)/(auth)/signup/page.tsx`   | Página de signup (cria o user NA BD, NÃO autentica)         |
 
@@ -61,17 +61,6 @@ CredentialsProvider({
 });
 ```
 
-**GitHub** (social):
-
-```ts
-GitHubProvider({
-  clientId: process.env.GITHUB_ID!,
-  clientSecret: process.env.GITHUB_SECRET!,
-});
-```
-
-> NOTA: `!` (non-null assertion) porque sabemos que as variáveis existem — mas devem estar no `.env` (ver `.env.example`).
-
 ### 3.2. session: { strategy: "jwt" }
 
 Sem **PrismaAdapter**, a sessão é um **token JWT** — não são precisas as tabelas `Account`/`Session`/`VerificationToken` no Prisma. Mais simples de aprender e funciona bem para esta app.
@@ -86,7 +75,7 @@ async jwt({ token, user }) {
     const dbUser = await db.user.upsert({
       where: { email },
       update: {},
-      create: { name, email, password: "" }, // primeiro login via GitHub
+      create: { name, email, password: "" },
     });
     token.dbUserId = dbUser.id; // Int interno da BD
   }
@@ -105,7 +94,7 @@ async session({ session, token }) {
 
 ### 3.4. Porquê o `upsert`?
 
-O GitHub devolve um `user` com `id` do GitHub ("octocat") e `email`. Os nossos `jobs` usam o `userId` (Int) da tabela `User`. O `upsert` garante que, após o primeiro login via GitHub, existe uma linha na BD com esse email — e o `dbUserId` liga os jobs ao utilizador correto.
+O `upsert` garante que existe sempre uma linha na BD `User` com o email do utilizador autenticado. Como o login é feito via Credentials (email+password), o utilizador já existe na BD (criado no signup) — mas o `upsert` é uma salvaguarda que liga o `dbUserId` aos jobs corretos.
 
 ---
 
@@ -135,7 +124,6 @@ export { handler as GET, handler as POST };
 Isto cria os endpoints:
 
 - `POST /api/auth/callback/credentials` → login com email+password
-- `GET /api/auth/callback/github` → callback do GitHub
 - `GET /api/auth/session` → devolve a sessão atual (usado pelo `useSession()`)
 - `GET /api/auth/signout` / `POST /api/auth/signout` → terminar sessão
 - `GET /api/auth/providers` → lista de providers
@@ -163,7 +151,7 @@ const { data: session, status } = useSession();
 
 ---
 
-## 7. Middleware — proteção de rotas
+## 7. Proxy — proteção de rotas
 
 ```ts
 export default withAuth({ pages: { signIn: "/login" } });
@@ -193,12 +181,6 @@ if (result?.error) {
 router.push("/app/dashboard");
 ```
 
-**Login com GitHub**:
-
-```ts
-signIn("github", { callbackUrl: "/app/dashboard" });
-```
-
 ---
 
 ## 9. Como ler a sessão no servidor
@@ -219,7 +201,6 @@ Usado por exemplo em `getJobsByUser()` — que lê a sessão em vez de confiar n
 1. Copia `.env.example` para `.env`
 2. Define `DATABASE_URL`
 3. Gera `NEXTAUTH_SECRET`: `openssl rand -base64 32`
-4. Cria OAuth App no GitHub (callback: `http://localhost:3000/api/auth/callback/github`)
-5. Preenche `GITHUB_ID` e `GITHUB_SECRET`
+4. Define `NEXTAUTH_URL=http://localhost:3000`
 
 > ⚠️ O login só funciona se as variáveis de ambiente estiverem definidas.

@@ -11,7 +11,7 @@ Aplicação **Next.js 16 (App Router)** + **Prisma (PostgreSQL/Neon)** + **NextA
 ```
 ┌─────────────────────────────────────────────────────┐
 │                    src/app                          │
-│  Rotas e layouts (pages, layouts, middleware)       │
+│  Rotas e layouts (pages, layouts, proxy)            │
 ├─────────────────────────────────────────────────────┤
 │  src/lib      │  src/components  │  src/hooks       │
 │  Lógica        │  UI por domínio  │  Lógica client  │
@@ -34,7 +34,7 @@ Aplicação **Next.js 16 (App Router)** + **Prisma (PostgreSQL/Neon)** + **NextA
 src/app/
 ├── layout.tsx                    → layout raiz (providers globais)
 ├── globals.css                   → estilos globais
-├── middleware.ts                 → proteção de rotas /app
+├── proxy.ts                      → proteção de rotas /app
 ├── (root)/
 │   ├── (marketing)/              → página pública (home)
 │   │   ├── layout.tsx            → navbar marketing
@@ -55,7 +55,7 @@ src/app/
 **Convenções de rotas:**
 
 - `(marketing)`, `(auth)`, `(root)` são **route groups** — não afetam a URL, só organizam
-- Rotas em `app/` são protegidas pelo `middleware.ts`
+- Rotas em `app/` são protegidas pelo `proxy.ts`
 
 ---
 
@@ -128,20 +128,11 @@ src/components/
    → redirect /app/dashboard
 ```
 
-### 3. Login (GitHub)
-
-```
-/login → "Continue with GitHub" → signIn("github")
-   → redirect para GitHub → callback
-   → jwt(): upsert na BD se email novo
-   → redirect /app/dashboard
-```
-
-### 4. Listar jobs (protegido)
+### 3. Listar jobs (protegido)
 
 ```
 /app/dashboard → JobTable → useJobs() → getJobsByUser (Server Action)
-   → middleware verifica sessão
+   → proxy verifica sessão
    → getServerAuthSession() lê userId da BD (não do cliente!)
    → db.job.findMany({ where: { userId } })
 ```

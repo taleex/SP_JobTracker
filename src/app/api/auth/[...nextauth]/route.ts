@@ -12,7 +12,6 @@ import { authOptions } from "@/lib/auth";
  *   - GET  /api/auth/providers            → lista de providers
  *
  * NextAuth também preenche automaticamente:
- *   - /api/auth/callback/github → callback do GitHub (via provider)
  *   - /api/auth/csrf            → token CSRF para os forms
  */
 const handler = NextAuth(authOptions);

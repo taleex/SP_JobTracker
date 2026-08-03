@@ -6,9 +6,11 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="h-screen flex flex-col">
+    <>
       <NavbarMarketing />
-      <div className="w-full flex-1 overflow-y-auto">{children}</div>
-    </main>
+      <main className="h-screen flex flex-col">
+        <div className="w-full flex-1 overflow-y-auto">{children}</div>
+      </main>
+    </>
   );
 }

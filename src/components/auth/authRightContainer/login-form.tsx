@@ -14,7 +14,6 @@ import { signIn } from "next-auth/react";
  * Usa o signIn() do NextAuth:
  *   - signIn("credentials", { redirect: false }) → valida email/password
  *     contra a tabela User (via authorize() em src/lib/auth.ts)
- *   - signIn("github") → inicia o fluxo OAuth do GitHub
  *
  * redirect: false → o NextAuth NÃO redireciona sozinho; fazemos
  * router.push("/app/dashboard") manualmente para controlar o fluxo.

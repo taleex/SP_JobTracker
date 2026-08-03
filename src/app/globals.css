@@ -150,19 +150,27 @@
 
 /* --- Navbar --- */
 .nav-bar-marketing {
-  @apply flex w-full justify-between items-center h-10 border-b p-8 bg-secondary sticky;
+  @apply fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between bg-transparent p-8;
 }
 
 .nav-bar-marketing-logo {
-  @apply text-3xl font-bold text-primary;
+  @apply text-3xl font-bold text-white leading-10;
+}
+
+.nav-bar-auth {
+  @apply fixed inset-x-0 top-0 z-50 flex w-full items-center justify-between bg-transparent p-8;
 }
 
 .nav-bar-marketing-buttons-group {
   @apply flex items-center gap-2;
 }
 
-.nav-bar-marketing-buttons {
-  @apply h-10 w-28 rounded-3xl;
+.nav-bar-marketing-buttons-primary {
+  @apply h-10 w-28 rounded-3xl font-bold text-primary;
+}
+
+.nav-bar-marketing-buttons-secondary {
+  @apply h-10 w-28 rounded-3xl font-bold text-secondary bg-transparent border-2 border-secondary hover:bg-secondary hover:text-primary;
 }
 
 /* --- Hero Section --- */
@@ -216,11 +224,11 @@
    Auth Page Styles
    ============================================ */
 .auth-container {
-  @apply flex h-full;
+  @apply flex h-screen;
 }
 
 .auth-left {
-  @apply flex flex-col p-16 w-1/2 h-full bg-primary;
+  @apply flex flex-col justify-center p-16 w-1/2 h-full bg-primary;
 }
 
 .auth-left-image {
@@ -248,5 +256,9 @@
 }
 
 .have-account {
-  @apply text-[14px] font-sans text-muted;
+  @apply text-[14px] font-sans text-shadow-secondary-foreground;
+}
+
+.have-account-redirect {
+  @apply font-bold hover:text-primary;
 }

@@ -1,4 +1,5 @@
 import AuthLeftContainer from "@/components/auth/authLeftContainer/auth-left-container";
+import NavbarMarketing from "@/components/marketing/nav-bar-marketing";
 
 /**
  * Layout partilhado pelas páginas /login e /signup.
@@ -16,9 +17,12 @@ export default function AuthLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main className="auth-container">
-      <AuthLeftContainer />
-      {children}
-    </main>
+    <>
+      <NavbarMarketing />
+      <main className="auth-container">
+        <AuthLeftContainer />
+        {children}
+      </main>
+    </>
   );
 }
