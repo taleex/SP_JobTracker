@@ -9,13 +9,17 @@ type JobTableLayoutProps = {
 
 export default function JobTableLayout({ jobs }: JobTableLayoutProps) {
   return (
-    <div className="flex flex-col p-8 gap-2 h-full w-1/2">
+    <div className="flex flex-col p-8 h-full w-1/2">
       {jobs?.map((job) => (
-        <Card key={job.id} className={cn("justify-between items-start p-4")}>
+        <Card
+          key={job.id}
+          className={cn("justify-between items-start p-2 rounded-none")}
+          onClick={() => {}}
+        >
           <div>
             {job.role}
             <p>{job.company}</p>
-            <p>{job.description}</p>
+            <p className="job-description">{job.description}</p>
           </div>
           <div className="ml-auto">
             <Badge

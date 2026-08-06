@@ -136,3 +136,13 @@
 .delete-dialog-icon-wrapper {
   @apply bg-destructive/10 text-destructive dark:bg-destructive/20 dark:text-destructive;
 }
+
+/* Table Desgin */
+
+.job-compamny {
+  @apply text-[12px] font-extralight;
+}
+
+.job-description {
+  @apply text-[12px] font-extralight;
+}
