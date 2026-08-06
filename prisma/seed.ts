@@ -1,4 +1,5 @@
-import { PrismaClient, JobStatus } from "@/generated/prisma/client";
+import "dotenv/config";
+import { PrismaClient, JobStatus, PlanType } from "@/generated/prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import bcrypt from "bcryptjs";
 
@@ -8,15 +9,78 @@ const prisma = new PrismaClient({ adapter });
 async function main() {
   const hashedPassword = await bcrypt.hash("password123", 10);
 
+  // ── Seed Plans (Free, Pro, Premium) ───────────────────────────
+  await prisma.plan.upsert({
+    where: { type: PlanType.FREE },
+    update: {},
+    create: {
+      name: "Free",
+      type: PlanType.FREE,
+      description: "For casual job seekers getting started.",
+      price: 0,
+      maxJobs: 10,
+      features: [
+        "Track up to 10 jobs",
+        "Basic dashboard",
+        "Application status tracking",
+        "Community support",
+      ],
+      popular: false,
+    },
+  });
+
+  const proPlan = await prisma.plan.upsert({
+    where: { type: PlanType.PRO },
+    update: {},
+    create: {
+      name: "Pro",
+      type: PlanType.PRO,
+      description: "For active job seekers who need more power.",
+      price: 9.99,
+      maxJobs: 100,
+      features: [
+        "Track up to 100 jobs",
+        "Detailed analytics",
+        "Resume & notes storage",
+        "Smart reminders",
+        "Email support",
+      ],
+      popular: true,
+    },
+  });
+
+  await prisma.plan.upsert({
+    where: { type: PlanType.PREMIUM },
+    update: {},
+    create: {
+      name: "Premium",
+      type: PlanType.PREMIUM,
+      description: "For power users and teams.",
+      price: 19.99,
+      maxJobs: -1, // unlimited
+      features: [
+        "Unlimited jobs",
+        "Everything in Pro",
+        "Team collaboration",
+        "Priority support",
+        "Export data",
+      ],
+      popular: false,
+    },
+  });
+
   const user = await prisma.user.upsert({
     where: {
       email: "demo@example.com",
     },
-    update: {},
+    update: {
+      planId: proPlan.id,
+    },
     create: {
       name: "Demo User",
       email: "demo@example.com",
       password: hashedPassword,
+      planId: proPlan.id,
     },
   });
 

@@ -19,3 +19,12 @@ export const JobStatus = {
 } as const
 
 export type JobStatus = (typeof JobStatus)[keyof typeof JobStatus]
+
+
+export const PlanType = {
+  FREE: 'FREE',
+  PRO: 'PRO',
+  PREMIUM: 'PREMIUM'
+} as const
+
+export type PlanType = (typeof PlanType)[keyof typeof PlanType]

@@ -6,8 +6,62 @@ import { redirect } from "next/navigation";
 
 // Jobs
 
+const JOB_STATUSES = [
+  "SAVED",
+  "APPLIED",
+  "INTERVIEW",
+  "OFFER",
+  "REJECTED",
+  "GHOSTED",
+] as const;
+type JobStatusValue = (typeof JOB_STATUSES)[number];
+
 export async function createJob(formData: FormData) {
-  return null;
+  const session = await getServerAuthSession();
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
+  const userId = Number(session.user.id);
+
+  // Extract and validate form fields
+  const role = (formData.get("role") as string | null)?.trim() ?? "";
+  const company = (formData.get("company") as string | null)?.trim() ?? "";
+  const jobLink = (formData.get("jobLink") as string | null)?.trim() || null;
+  const description =
+    (formData.get("description") as string | null)?.trim() || null;
+  const notes = (formData.get("notes") as string | null)?.trim() || null;
+  const status = (formData.get("status") as string | null) ?? "APPLIED";
+
+  // Validate required fields
+  if (!role || !company) {
+    return { success: false, error: "Role and company are required." };
+  }
+
+  // Validate status is a valid JobStatus
+  if (!JOB_STATUSES.includes(status as JobStatusValue)) {
+    return { success: false, error: "Invalid job status." };
+  }
+
+  try {
+    await db.job.create({
+      data: {
+        userId,
+        role,
+        company,
+        jobLink,
+        description,
+        notes,
+        status: status as JobStatusValue,
+      },
+    });
+
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+    return { success: false, error: "Something went wrong. Please try again." };
+  }
 }
 export async function updateJobStatus(jobId: number, status: string) {
   return null;
@@ -15,15 +69,7 @@ export async function updateJobStatus(jobId: number, status: string) {
 export async function deleteJob(jobId: number) {
   return null;
 }
-/**
- * Devolve os jobs do utilizador autenticado.
- *
- * NÃO recebe userId do cliente — lê a sessão do servidor.
- * Isto elimina o IDOR (vulnerabilidade onde qualquer pessoa podia
- * pedir os jobs de outro userId mudando o número no frontend).
- *
- * Se não houver sessão → redireciona para /login (não devolve dados).
- */
+
 export async function getJobsByUser() {
   const session = await getServerAuthSession();
 

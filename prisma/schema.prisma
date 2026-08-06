@@ -18,6 +18,8 @@ model User {
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
+  planId    Int      @default(1)
+  plan      Plan     @relation(fields: [planId], references: [id])
   jobs      Job[]
 }
 
@@ -46,4 +48,24 @@ model Job {
   @@index([userId])
   @@index([status])
   @@index([userId, status])
+}
+
+enum PlanType {
+  FREE
+  PRO
+  PREMIUM
+}
+
+model Plan {
+  id          Int      @id @default(autoincrement())
+  name        String
+  type        PlanType @unique
+  description String   @db.Text
+  price       Float
+  maxJobs     Int
+  features    String[]
+  popular     Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  users       User[]
 }

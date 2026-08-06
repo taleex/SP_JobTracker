@@ -27,3 +27,8 @@ export type User = Prisma.UserModel
  * 
  */
 export type Job = Prisma.JobModel
+/**
+ * Model Plan
+ * 
+ */
+export type Plan = Prisma.PlanModel

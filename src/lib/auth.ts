@@ -4,38 +4,14 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import db from "@/lib/db";
 
-/**
- * Configuração central do NextAuth.
- *
- * ── COMO FUNCIONA (resumo didático) ──────────────────────────────────────
- *
- * 1. PROVIDERS — os métodos de login disponíveis:
- *    • Credentials: login com email + password (valida contra a tabela User)
- *
- * 2. SESSION STRATEGY "jwt" — a sessão é um token JWT (stateless).
- *    Não precisamos de tabelas extra (Account/Session) no Prisma.
- *
- * 3. CALLBACKS — pontos de extensão do fluxo:
- *    • jwt()  → corre sempre que um token é criado/atualizado.
- *              Aqui fazemos o UPSERT do utilizador na BD (para ligar os jobs)
- *              e guardamos o userId interno da BD no token.
- *    • session() → expõe os dados do token na sessão que o cliente recebe.
- *
- * 4. PAGES — next-auth/{signin} → define para onde o proxy redireciona.
- * ─────────────────────────────────────────────────────────────────────────
- */
-
 export const authOptions: NextAuthOptions = {
   providers: [
-    // ── Login com email + password ─────────────────────────────────────
     CredentialsProvider({
       name: "Email and Password",
       credentials: {
         email: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" },
       },
-      // authorize() é chamado com os dados do formulário de login.
-      // Se devolver null → login falha. Se devolver o user → login OK.
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 

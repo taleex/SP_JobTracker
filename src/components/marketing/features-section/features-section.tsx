@@ -1,4 +1,4 @@
-import { Card } from "@/components/ui/card";
+import PlanCard from "./plan-card";
 
 type TFeatures = {
   title: string;
@@ -49,13 +49,12 @@ export default function FeaturesSection() {
   return (
     <section className="feature-section">
       {features.map((feature: TFeatures) => (
-        <Card key={feature.title} className="feature-card">
-          <div className="flex gap-2">
-            <span>{feature.logo}</span>
-            <h2>{feature.title}</h2>
-          </div>
-          <p>{feature.subtitle}</p>
-        </Card>
+        <PlanCard
+          key={feature.title}
+          title={feature.title}
+          subtitle={feature.subtitle}
+          logo={feature.logo}
+        />
       ))}
     </section>
   );

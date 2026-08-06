@@ -1,5 +1,6 @@
 import FeaturesSection from "@/components/marketing/features-section/features-section";
 import HeroSection from "@/components/marketing/hero-section/hero-section";
+import PricingSection from "@/components/marketing/pricing-section/pricing-section";
 
 export const metadata = {
   title: "Home",
@@ -10,6 +11,7 @@ export default function Home() {
     <>
       <HeroSection />
       <FeaturesSection />
+      <PricingSection />
     </>
   );
 }
